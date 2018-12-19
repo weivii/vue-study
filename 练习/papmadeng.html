@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head> 
+<body>
+    <div id="app">
+        <input type="button" @click="roll" value="Go">
+        <input type="button" @click="stop" value="stop"> 
+         <p>{{msg}}</p>
+    </div>
+    <script>
+       let vm = new Vue({
+           el:"#app",
+           data:{
+             msg:"猥琐发育，别浪！",
+             timeId:null
+           },
+           methods:{
+              roll(){
+                // vue在创建时会把data中和methods中所有成员，挂在在自己的实列对象上（vm）
+                //  this指向vm 所以this.msg this.timeId this.roll 都是实例对象vm身上的
+                // clearInterval参数如果传入的有问题也不会发生什么错误
+                // 传入id有则清除，没有则继续执行后面的代码
+                clearInterval(this.timeId)
+               this.timeId=setInterval(()=>{
+                //动起来原理：吧头切下来放到屁股后面
+                 // 切头
+                let start = this.msg.substr(0,1)
+                // 切尾
+                let end = this.msg.substr(1)
+              //vue框架的特点：当Model层数据发生变化时，自动刷新view层引用的数据
+                this.msg=end+start
+               },400)
+              
+
+              },
+              stop(){
+                  clearInterval(this.timeId)
+                }
+           }
+       })
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="Go" @click="goHandler">
+        <input type="button" value="Stop" @click="stopHandler">
+        <p>{{msg}}</p>
+    </div>
+
+    <script>
+     var vm = new Vue({
+         el:'#app',
+         data:{
+             msg:"猥琐发育，别浪！",
+             timeId:null
+         },
+         methods:{
+            goHandler(){
+                clearInterval(this.timeId) 
+                this.timeId=setInterval(()=>{
+                let start = this.msg.substr(0,1)
+                let end=this.msg.substr(1)
+                this.msg =end+start
+              },400)
+            },
+            stopHandler(){
+                clearInterval(this.timeId) 
+            }
+         }
+     })
+    </script>
+</body>
+</html>

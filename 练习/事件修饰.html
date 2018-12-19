@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <style>
+       .inner{
+           width: 100px;
+           height: 100px;
+           background-color: #ff3040;
+       }
+       .outer{
+           width: 200px;
+           height: 200px;
+           background-color: #ffff22;
+       }
+    </style>
+</head>
+<body>
+    <!-- 此时点击按钮 先触发了input clickBtn 然后触发了div divHandler 这种现象为事件冒泡 此时给input加.stop阻止事件冒泡-->
+    <!-- .stop 阻止冒泡 .self 只有点击当前元素自身才会被触发事件 通过事件冒泡和事件捕获传过来的事件不会触发-->
+    <div id="app">
+        <div class="outer" @click="div2Handler">
+                <div class="inner" @click.self="divHandler">
+                     <input type="button" value="按钮" @click.stop="clickBtn">
+                </div>
+        </div>
+    </div> 
+
+    <!-- 阻止浏览器默认行为.prevent .once只执行一次 事件修饰可以串联加多个-->
+    <!-- <div id="app">
+         <a href="http://www.baidu.com" @click.prevent.once="aHandler">点击一下，跳转到百度</a> 
+    </div> -->
+   
+    <!-- .capture 实现捕获-->
+    <!-- <div id="app">
+            <div class="inner" @click.capture="divHandler">
+                <input type="button" value="按钮" @click="clickBtn">
+            </div>
+    </div>  -->
+
+    <script>
+       var vm = new Vue({
+           el:"#app",
+           data:{
+              
+           },
+           methods:{
+            divHandler:function(){
+               console.log("inner 盒子出发了点击事件")
+            },
+            clickBtn(){
+               console.log("input 盒子触发了点击事件")
+            },
+            aHandler(){
+               console.log("a 连接触发了")
+            },
+            div2Handler(){
+                console.log("outer 盒子触发了点击事件")
+            }
+           }
+       })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <style>
+      [v-cloak]{
+          display:none;
+      }
+    </style> -->
+</head>
+<body>
+    <div id="app">
+        <!-- <p v-cloak>{{msg}}</p> -->
+        <p v-text="msg">以纯文本的方式渲染 覆盖标签里的内容</p> 
+        <p v-html="msg2">以html的方式渲染 覆盖标签里的内容</p> 
+        <input type="button" value="按钮" v-bind:title="xxx" v-on:click="show">
+
+    </div>
+    <script src="lib/vue-2.4.0.js"></script>
+    <script>
+       var vm = new Vue({
+           el:"#app",
+           data:{
+               msg:"hello,vuejs",
+               msg2:"<h2>hello</h2>",
+               xxx:"123"
+           },
+           methods:{
+               show:function(){
+                   console.log("123")
+                   }
+           }
+       })
+
+    </script>
+</body>
+</html>

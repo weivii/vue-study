@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 纯文本渲染 会将标签内的内容覆盖 -->
+       <h2 v-text="msg">hahha </h2>
+       <div v-text="text"></div>
+       <!-- 以html的方式渲染  -->
+       <div v-html="text">哈哈</div>
+       <!-- 插值表达式 小胡子语法-->
+       <p>{{msg}}</p>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+          msg:"还要多久哈哈哈",
+          text:"<h3>嘻嘻嘻</h3>"
+        },
+        methods:{
+
+        }
+    })
+    </script>
+</body>
+</html>
