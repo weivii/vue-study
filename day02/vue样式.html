@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <style>
+        .color{
+            color:#ff3040;
+            background-color:yellow;
+            /* display:inline-block; */
+            /* display:none; */
+             width:200px;
+             height:200px;
+             margin:10px auto;
+
+        }
+        .thin{
+            font-size:30px;
+        }
+         .active{
+             font-style:italic;
+         }
+         .show{
+             /* list-style: none; */
+             float:left;
+         }
+    </style>
+</head>
+<body>
+    <div id="app">
+            <p :class="['color','thin',{'active':flag}]">node</p>
+            <div :class="['color','thin','active']">{{msg}}
+                <ul>
+                    <li :class="{thin:true,active:true,show:true}">{{msg}}</li>
+                </ul>
+            </div>
+            <div :class="['thin',flag?'active':'']">{{note}}</div>
+    </div>
+    <script>
+     var vm = new Vue({
+         el:"#app",
+         data:{
+             flag:true,
+             msg:"你是小猪佩琪",
+             note:"hello"
+         }
+     })
+    </script>
+</body>
+</html>

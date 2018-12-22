@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+         <p v-for="item in users">{{item.id}} {{item.name}}</p>
+         <h4 v-for="(item,index) in list">{{item}}</h4>
+         <p v-for="(val,key,index) in obj">
+             {{val}}  
+           <!-- ww 18 play -->
+            {{key}}
+      <!-- name age hobby -->
+            {{index}}
+             <!-- 0 1 2 -->
+         </p>
+         <h4 v-for="(val,index) in list2">
+             我是{{val.name}}芳龄{{val.age}}
+         </h4>
+         <div v-for="cout in 5">{{cout}}</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+              users:[
+                  {id:1,name:"zs"},
+                  {id:2,name:"ww"},
+                  {id:3,name:"dd"}
+              ],
+              list:["ww","zx","li","bob"],
+              obj:{
+                name:"ww",
+               age:18,
+               hobby:"play"
+              },
+              list2:[{
+                name:"ww",
+               age:18,
+               hobby:"play" 
+              }]
+
+            },
+            methods:{
+               
+            }
+        })
+    </script>
+</body>
+</html>
