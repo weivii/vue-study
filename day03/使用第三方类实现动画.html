@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <link rel="stylesheet" href="lib/animate.css">
+</head>
+<body>
+    <!-- <div id="app">
+          <input type="button" value="toggle" @click="flag=!flag">
+         <transition
+         enter-active-class="bounceIn"
+         leave-active-class="bounceOut"
+         
+         :duration="{ enter: 500, leave: 800 }"> -->
+         <!-- :duration="{ebter:500 ,leave:800}" 设置入场和离场时的时长 -->
+         <!-- 要加一个class基本的类才有效果class="animated" -->
+               <!-- <h3 v-if="flag" class="animated">hahahhahhhh</h3> 
+         </transition>   
+
+    </div> -->
+
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <transition 
+         enter-active-class="rollIn"
+         leave-active-class="rollOut"
+         :du90 ration="{enter:600,leave:800}">
+                <h4 v-if="flag" class="animated" v-color v-fontsize="30">{{msg}}</h4>
+        </transition>
+    </div>
+    <script>
+       var vm = new Vue({
+           el:"#app",
+           data:{
+             flag:false,
+             msg:"我有一个小猫"
+           },
+           methods:{
+
+           },
+           directives:{
+               "color":{
+                  bind(el,binding){
+                      el.style.color="pink"
+                  }
+
+               },
+               "fontsize":{
+                   bind(el,binding){
+                       el.style.fontSize=parseInt(binding.value)+"px"
+                   }
+               }
+           }
+       })
+    </script>
+</body>
+</html>

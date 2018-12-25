@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <style>
+         .clear{
+             width: 20px;
+             height: 20px;
+             border-radius:50%;
+             background-color: #ff3040;
+         }
+    </style>
+</head>
+<body>
+    <div id="app">
+          <input type="button" value="toggle" @click="flag=!flag">
+          <transition
+          v-on:before-enter="beforeEnter"
+          @enter="enter"
+          @after-enter="afterEnter">
+                <div class="clear" v-show="flag"></div>
+          </transition>    
+    </div>
+    <script>
+      var vm = new Vue({
+          el:"#app",
+          data:{
+              flag:false,
+          },
+          methods:{
+            beforeEnter:function(el){//el表示要执行动画的dom元素
+                 el.style.transform="translate(0,0)"
+            },
+            enter(el,done){
+                el.offsetWidth//强制刷新
+                el.style.transform="translate(200px,200px)"
+                el.style.transition="all 2s ease"
+              done()
+            },
+            afterEnter(el){
+             this.flag = !this.flag
+            }
+          }
+      })
+    </script>
+</body>
+</html>

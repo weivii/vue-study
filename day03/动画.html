@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <style>
+        /* 使用两组自定义的样式，来控制transition内部元素实现动画 */
+        /* v-enter 是元素还没有进入的状态 */
+        /* v-leave-to 是元素离开完毕的状态*/
+    /* .v-enter,
+    .v-leave-to{
+         opacity: 0;
+         transform:translateX(150px)
+    } */
+    /* v-enter-active 元素进入时的状态 */
+    /* v-leave-active 元素离开时的状态 */
+    /* .v-enter-active,
+    .v-leave-active{
+        transition: all 1s ease;
+    } */
+    /* 自定义前缀 */
+    .my-enter,
+    .my-leave-to{
+         opacity: 0;
+         transform:translateX(150px)
+    }
+    /* v-enter-active 元素进入时的状态 */
+    /* v-leave-active 元素离开时的状态 */
+    .my-enter-active,
+    .my-leave-active{
+        transition: all 1s ease;
+    }
+    </style>
+</head>
+<body>
+    <!-- 不使用动画 -->
+    <!-- <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <h4 v-if="flag">这是一个标签</h4>
+    </div> -->
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <!-- 使用transition 把需要动画的元素包裹起来 由vue官方提供 -->
+        <transition name="my">
+            <h3 v-if="flag">这是一个标签</h3>
+        </transition>
+    </div>
+    <script>
+      var vm = new Vue({
+          el:"#app",
+          data:{
+              flag:false
+          },
+          methods:{
+
+          }
+      })
+    </script>
+</body>
+</html>

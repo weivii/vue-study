@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7.css">
+    <script src="lib/vue-2.4.0.js"></script>
+    <script src="lib/vue-resource-1.3.4.js"></script>
+
+</head>
+<body>
+    <div id="app">
+            <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">添加品牌</h3>
+                    </div>
+                    <div class="panel-body form-inline">
+                      <label for="">
+                           Name:
+                            <input type="text" class="form-control" v-model="name" v-focus v-color>
+                        </label>
+                        <input type="button" value="添加"  class="btn btn-primary" @click="add" >
+                     </div>
+            </div>
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                       <th>Id</th>
+                       <th>Name</th>
+                       <!-- <th>Description</th> -->
+                       <th>Ctime</th>
+                       <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in list" :key="item.id">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <!-- <td>{{item.description}}</td> -->
+                        <td>{{item.ctime|ctimeFarmat}}</td>
+                        <td>
+                            <a href="" @click.prevent="del(item.id)">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <script>
+     Vue.http.options.root="http://litc.pro:8888/";
+     Vue.http.options.emulateJSON="true"
+      var vm = new Vue({
+          el:"#app",
+          data:{
+              name:"",
+             list:[
+                //  {id:1,name:"哈哈哈",description:"123",ctime:new Date(),operation:"111"}
+             ]
+             
+          },
+          created() {
+            this.getInfo()
+         },
+          methods:{
+             getInfo(){
+                 this.$http.get("api/getprodlist").then(result=>{
+                    //  console.log(result.body)
+                      if(status==0){
+                          this.list=result.body.message
+                      }
+                 })
+             },
+             add(){
+               this.$http.post("api/addproduct",{name:this.name}).then(result=>{
+                     if(result.body.status==0){
+                        this.getInfo()
+                        this.name=''
+                     }else{
+                         alert("添加失败")
+                     }
+               })
+             },
+             del(id){
+                this.$http.get("api/delproduct/"+id).then(result=>{
+                     if(result.body.status==0){
+                         this.getInfo()
+
+                     }else{
+                         alert("删除失败")
+                     }
+                }) 
+             }
+
+          },
+          filters:{
+            ctimeFarmat:function(datastr,pannter=""){
+                var dt =new Date(datastr)
+                var y = dt.getFullYear()
+                var m = dt.getMonth()+1
+                var d = dt.getDate() 
+                return `${y}-${m}-${d}`
+            }
+          },
+          directives:{
+              "focus":{
+                  inserted(el){
+                      el.focus()
+                  }
+              },
+              "color":{
+                  bind(el,binding){
+                      el.style.color="#ff3040"
+                  }
+              }
+          }
+      })
+    </script>
+</body>
+</html>

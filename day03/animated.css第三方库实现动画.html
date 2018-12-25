@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <link rel="stylesheet" href="lib/animate.css">
+</head>
+<body>
+    <div id="app">
+      <input type="button" value="toggle" @click="flag=!flag">
+
+    <transition 
+    enter-active-class="slideInLeft"
+    leave-active-class="slideInRight"
+    :duration="{enter:400,leave:600}">
+        <div v-if="flag" class="animated" v-color="'red'" v-fontsize>{{msg}}</div>
+    </transition>
+    </div>
+    <script>
+       var vm =  new Vue({
+           el:"#app",
+           data:{
+               flag:false,
+               msg:"you are a pig"
+           },
+           methods:{},
+           directives:{
+               "color":{
+                   bind(el,binding){
+                       el.style.color=binding.value
+                   }
+               },
+              "fontsize":{
+                  bind(el,binding){
+                    //   el.style.fontSize=parseInt(binding.value)+"px" 调用时v-fontsize="40"
+                    el.style.fontSize="40px"
+                  }
+              }
+           }
+
+       }) 
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+         <p>{{msg|msgFormat}}</p>
+         <h4>{{add|addFormat}}</h4>
+         <!-- <input type="text" autofocus> 自动获取焦点-->
+         <input type="text" v-focus  v-color="'green'">
+    </div>
+    <script>
+        Vue.config.keyCodes.enter=113
+        
+        Vue.filter("msgFormat",function(msg,arr){
+            return msg.replace("王坤坤","龚成")
+        })
+        Vue.directive("color",{
+            bind(el,binding){//只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+                // el.style.color="red" red
+                // console.log(binding.name)color
+                // console.log(binding.value)green
+                // name：指令名，不包括 v- 前缀。
+                // value：指令的绑定值，例如：v-my-directive="1 + 1" 中，绑定值为 2。v-color="'green'"绑定值为green
+                el.style.color=binding.value//green
+            }
+        })
+       var vm = new Vue({
+           el:"#app",
+           data:{
+              msg:"王坤坤没有形象了",
+              add:"龚成说的对",
+           },
+           methods:{
+           
+           },
+           filters:{
+            addFormat(add){
+               return add.replace("龚成","王坤")
+            }
+          
+           },
+           directives:{
+                "focus":{
+                    inserted:function(el){
+                        el.focus()
+                    }
+                }
+            }
+
+       })
+    </script>
+</body>
+</html>
