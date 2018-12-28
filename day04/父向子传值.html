@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+       <p>{{msg}}</p>
+       <mycom :pmsg="msg"></mycom>
+    </div>
+   
+    <script>
+     var vm = new Vue({
+         el:"#app",
+         data:{
+            msg:"名花倾国两相欢"
+         },
+         components:{
+           mycom:{
+            template:"<h2>这是子组件---{{pmsg}}</h2>",
+            props:["pmsg"]
+           },
+          
+         }
+        
+     })
+    </script>
+</body>
+</html>

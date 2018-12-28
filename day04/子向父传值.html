@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+       
+        <com2 @showinfo="show"></com2>
+    </div>
+    <template id="teml">
+        <!-- 只有一个根标签 -->
+         <div>
+             <h3 @click="click">我一</h3>
+         </div>
+    </template>
+    <script>
+       var com2={  
+             template:"#teml",
+              data:function(){
+                return {
+                    msg:"我一定去"
+                }
+              },
+              methods:{
+                click(){
+                   this.$emit("showinfo",this.msg)
+                }
+              }
+          }
+      var vm = new Vue({
+          el:"#app",
+          data:{
+           datamsg:null
+          },
+          methods:{
+            show(data){
+             this.datamsg=data
+            }
+          },
+          components:{
+            com2
+          }
+      })
+    </script>
+</body>
+</html>

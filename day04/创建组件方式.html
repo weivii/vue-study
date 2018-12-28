@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <!-- 1.1使用vue.extend来创建全局vue组件 创建模板对象 -->
+    <!-- 1.2使用vue.component("组件名称"，创建出来的模板对象) -->
+    <!-- <div id="app">
+        <mycom> </mycom>
+    </div>
+    <script>
+       var com= Vue.extend({
+            template:"<h2>七月的风，八月的雨</h2>"
+        })
+        Vue.component("mycom",com)
+      var vm = new Vue({
+          el:"#app",
+          data:"",
+
+      })
+    </script> -->
+
+    <!-- 2. -->
+    <div id="app">
+        <mycom></mycom>
+        <mycom2></mycom2>
+    </div>
+    <template id="tmpl">
+        <div>
+              <h2>君生我未生</h2>
+              <h2>{{msg}}</h2>
+        </div>
+    </template>   
+    <script>
+        Vue.component("mycom",{
+            template:"<h1>遥远的你</h1>"
+        })
+    //    3
+        Vue.component("mycom2",{//mucom2组件名称 ，模板对象 template 抽取到HTML中的template标签内
+          template:"#tmpl",
+          data:function(){//组件内的data必须是一个方法，方法内部必须返回一个对象，组件内部的数据都是独立的
+              return {
+                      msg:"我生君已老"
+              }
+          }
+      })
+     var vm = new Vue({
+         el:"#app",
+         data:{},
+     })
+    </script>
+
+   
+
+   
+
+</body>
+</html>

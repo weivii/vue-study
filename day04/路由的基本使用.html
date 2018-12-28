@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <!-- 安装路由模块 -->
+    <script src="lib/vue-router-3.0.1.js"></script>
+    <style>
+       .router-link-active,
+       .myactive{
+           color:pink;
+           font-weight:700;
+           background-color: skyblue;
+           
+       }
+       .v-enter,
+        .v-leave-to{
+            transform:translateX(140px)
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition:all .8s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <router-link>默认渲染成一个a标签 -->
+          <router-link to="/login">登录</router-link>
+          <router-link to="/register">注册</router-link>
+          <!-- 站位组件router-view,  router-view在哪里，路由匹配成功后组件就会放到哪里-->
+         <transition mode="out-in">
+                <router-view></router-view>
+         </transition>
+    </div>
+
+    <script>
+        // 组件模板对象
+        var login = {
+            template:"<h2>登录组件</h2>"
+        }
+        var register={
+            template:"<h2>注册组件</h2>"
+        }
+        // 创建路由对象，配置路由的匹配规则
+        var router = new VueRouter({
+            // 匹配规则
+            routes:[ 
+                {path:"/login",component:login},
+                {path:"/register",component:register}
+
+            ],
+            linkActiveClass:"myactive"
+        })
+      var vm = new Vue({
+          el:"#app",
+          data:{
+
+          },
+          methods:{
+
+          },
+        //   将router挂载到vm实列上
+          router
+      })
+    </script>
+</body>
+</html>
