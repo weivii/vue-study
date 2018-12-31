@@ -22,8 +22,9 @@
         fullname:""
        },
        watch:{
-        firstname:function(Newval,old){
-           fullname
+        firstname:function(newVal,old){
+           fullname=newVal+lastname
+           
         }
        }
    })

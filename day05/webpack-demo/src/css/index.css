@@ -1,0 +1,14 @@
+html,
+body{
+    margin:0;
+    padding:0
+}
+li{
+    background:url(../imgs/fei.jpg);
+    height:300px;
+}
+li:nth-child(2){
+    background-color: yellow;
+    color:red;
+   
+}   
